@@ -1,4 +1,4 @@
-# 对接HelloController的  13到25行
+# 对接HelloController的  18到30行
 #server:
 #  path: 8080
 #  servlet:
@@ -9,7 +9,7 @@
 
 spring:
   profiles:
-    active: dev
+    active: dev #  active: dev --> 意思是使用application-dev.yml这个配置文件
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://127.0.0.1:3306/dbgirl

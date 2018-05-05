@@ -1,0 +1,25 @@
+一、 
+    ## application.yml配置文件:
+
+    server:
+      path: 8080 #修改端口号
+      servlet: 
+        context-path: /hm  #
+    cupSize: B
+    age: 18
+    content: "cupSize: ${cupSize}, age: ${age}" #配置中使用配置
+
+    // 获取配置文件中的值：
+    @Value("${cupSize}")//配置文件application.yml中的cupSize:配置
+    private String cupSize;
+
+    @Value("${age}")
+    private Integer age;
+
+    @Value("${content}")
+    private String content;
+
+    @RequestMapping(value={"/demo"},method = RequestMethod.GET)
+    public String saydemo(){
+        return cupSize+age;
+    }

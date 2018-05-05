@@ -1,0 +1,43 @@
+// -------------  属性配置
+@Value //实现配置内容的注入
+//实体类中用到：
+@Component  //加了这个注解才能在Controller用 @Autowired添加这个类注入bean
+@ConfigurationProperties(prefix = "girl")  //获取前缀是“girl”的配置内容映射过来  例子：application-dev.yml的第3-6行
+
+
+// ------------ 控制器Controller：
+@Controller //处理http请求
+@RestController //spirng4之后新加的注解，此注解等同原来返回json需要@Controller配合@ResponseBody
+@RequestMapping(value={"/say","/hi"},method = RequestMethod.GET)  //配置url映射  /say和/hi请求都接受
+
+// ----------- Controller 的使用
+@PathVariable  //获取url中的数据（请求地址中的数据）
+@RequestParam  //获取请求参数值(请求地址总的参数)
+@GetMapping    //组合注解  （）
+
+
+@PathVariable例子:
+    @RequestMapping(value="/{id}/say",method = RequestMethod.GET)  //http://localhost.:8080/hello/23/say
+    public String say(@PathVariable("id") Integer id){
+        return "id:" + id;
+    }
+
+@RequestParam 和 @GetMapping的例子：
+    /**
+     * value = "id" 获取请求参数id
+     * required = false  设置参数是否
+     * defaultValue = "0"  设置默认值
+     * @param id
+     * @return
+     */
+    //@RequestMapping(value="/say",method = RequestMethod.GET)  //    http://localhost.:8080/hello/say?id=100
+    @GetMapping(value="/say")                                   //    http://localhost.:8080/hello/say?id=100    效果同上        
+    public String say(@RequestParam(value = "id",required = false,defaultValue = "0") Integer id){// @@@@@@@@@常用的特性
+        return "id:" + id;
+    }
+
+// -------------- 事务
+@Transactional//事务操作(放在方法上，同时操作多条数据，如：同时插入两条数据，要么都成功，要么都失败) 只有查询时不需要加事务
+
+@Valid 表单验证注解
+
