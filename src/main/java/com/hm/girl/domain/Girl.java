@@ -1,24 +1,20 @@
-package com.hm.girl;
+package com.hm.girl.domain;
 
-import com.sun.javafx.beans.IDProperty;
-
-
-import javax.annotation.Generated;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.IdClass;
-import javax.xml.soap.SAAJResult;
+import javax.validation.constraints.Min;
 
 @Entity//类对应数据库的一个表
 public class Girl {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue//主键
     private Integer id;
 
     private String cupSize;
 
+    @Min(value =18,message = "未成年少女禁止入内")
     private Integer age;
 
     public Girl() {//必须要

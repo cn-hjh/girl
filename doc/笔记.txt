@@ -1,0 +1,6 @@
+
+日志记录:
+定义属性： private final static Logger logger = LoggerFactory.getLogger(HttpAspect.class);//日志记录  HttpAspect.class参数对应类名
+     logger.info("拦截请求---方法执行前");
+日志打印结果：2018-05-06 01:35:12.100  INFO 271612 --- [nio-8080-exec-1] com.hm.girl.aspect.HttpAspect            : 拦截请求---方法执行前
+

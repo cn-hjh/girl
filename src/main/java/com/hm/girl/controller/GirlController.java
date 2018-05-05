@@ -1,13 +1,22 @@
-package com.hm.girl;
+package com.hm.girl.controller;
 
+import com.hm.girl.aspect.HttpAspect;
+import com.hm.girl.domain.Girl;
+import com.hm.girl.respository.GirlRespository;
+import com.hm.girl.service.GirlService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
 public class GirlController {
+
+    private final static Logger logger = LoggerFactory.getLogger(GirlController.class);//日志记录
 
     @Autowired
     private GirlRespository girlRespository;
@@ -21,21 +30,23 @@ public class GirlController {
      */
     @GetMapping(value = "/girls")
     public List<Girl> girlList(){
-       return girlRespository.findAll();
+        logger.info("girlList()");
+        return girlRespository.findAll();
     }
 
     /**
      * 添加一个女生
-     * @param cupSize
-     * @param age
+     * @param girl
      * @return
      */
     @PostMapping(value = "/girls")
-    public Girl girlAdd(@RequestParam("cupSize")String cupSize,
-                         @RequestParam("age") Integer age){
-        Girl girl = new Girl();
-        girl.setCupSize(cupSize);
-        girl.setAge(age);
+    public Girl girlAdd(@Valid Girl girl, BindingResult bindingResult){//@Valid 表单验证注解 -- 禁止添加未成年少女
+        if (bindingResult.hasErrors()){
+            System.out.println(bindingResult.getFieldError().getDefaultMessage());
+            return null;
+        }
+        girl.setCupSize(girl.getCupSize());
+        girl.setAge(girl.getAge());
         return girlRespository.save(girl);
     }
     //查询一个女生

@@ -1,16 +1,17 @@
-package com.hm.girl;
+package com.hm.girl.controller;
 
+import com.hm.girl.propertis.GirlProperties;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+/**
+ * 项目属性配置
+ */
 @RestController //spirng4之后新加的注解，此注解等同原来返回json需要@Controller配合@ResponseBody
 @RequestMapping("/hello")
 public class HelloController {
 
- /*  @Value("${cupSize}")// 实现配置内容的注入,配置文件application.yml中的cupSize:配置
+ /*  @Value("${cupSize}")// 实现配置内容的注入,配置文件application.yml中第6中行的cupSize:配置
     private String cupSize;
 
     @Value("${age}")
@@ -26,6 +27,11 @@ public class HelloController {
 
     @Autowired
     private GirlProperties girlProperties;
+
+    @RequestMapping(value={"/ha","/hi"},method = RequestMethod.GET)  //配置url映射  /ha和/hi请求都接受
+    public String sayhi() {
+        return girlProperties.getCupSize();
+    }
 
     /**
      * value = "id"           获取请求参数id
