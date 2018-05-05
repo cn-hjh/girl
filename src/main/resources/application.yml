@@ -1,0 +1,21 @@
+# 对接HelloController的  13到25行
+#server:
+#  path: 8080
+#  servlet:
+#    context-path: /hm
+#cupSize: B
+#age: 18
+#content: "cupSize: ${cupSize}, age: ${age}" #配置中使用配置
+
+spring:
+  profiles:
+    active: dev
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/dbgirl
+    username: root
+    password: root
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
