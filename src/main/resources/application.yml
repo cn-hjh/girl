@@ -17,5 +17,5 @@ spring:
     password: root
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: update   # create ,先删除旧的数据再创建  ；update第一次执行会创建，如果旧表有数据则不会删除，
     show-sql: true

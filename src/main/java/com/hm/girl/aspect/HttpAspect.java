@@ -2,7 +2,6 @@ package com.hm.girl.aspect;
 
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.*;
-import org.omg.CORBA.Object;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -29,16 +28,15 @@ public class HttpAspect {
     /**
      * 所拦截的方法执行之前执行
      */
-    //@Before("execution(public * com.hm.girl.controller.GirlController.*(..))")//  .*(..) 拦截所有方法
     @Before("log()")
     public void doBefore(JoinPoint joinPoint){
-        System.out.println("拦截请求---方法执行前");
+        System.out.println("1.拦截请求---方法执行前");
         //推荐使用logger打印
-        logger.info("拦截请求---方法执行前");
+        logger.info("1.拦截请求---方法执行前");
 
         //----------------- 获取http请求的内容 ---------------------------
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
-        HttpServletRequest request = attributes.getRequest();
+        HttpServletRequest request = attributes.getRequest();//javax.servlet.http.HttpServletRequest;
         //获取url
         logger.info("url={}",request.getRequestURL());
         //获取method
@@ -52,11 +50,10 @@ public class HttpAspect {
 
     }
 
-    //@After("execution(public * com.hm.girl.controller.GirlController.*(..))")//  .*(..) 拦截所有方法
     @After("log()")
     public void doAfter(){
-        System.out.println("方法执行后。。。");
-        logger.info("方法执行后。。。");
+        System.out.println("2.方法执行后。。。");
+        logger.info("2.方法执行后。。。");
     }
 
     /**
@@ -64,9 +61,10 @@ public class HttpAspect {
      * @param object
      */
     @AfterReturning(returning = "object",pointcut = "log()")
-    public void doAfterReturning(Object object){
-        System.out.println("获取方法执行后返回的内容。。。doAfterReturning()");
-        logger.info("resopnse={}",object.toString());
+    public void doAfterReturning(Object object){// 选择  --> Object java.lang
+        System.out.println("3.获取方法执行所返回的内容。。。doAfterReturning()");
+        logger.info("3.获取方法执行所返回的内容=resopnse={}",object.toString());
+
     }
 
 

@@ -40,10 +40,9 @@ public class GirlController {
      * @return
      */
     @PostMapping(value = "/girls")
-    public Girl girlAdd(@Valid Girl girl, BindingResult bindingResult){//@Valid 表单验证注解 -- 禁止添加未成年少女
+    public Object girlAdd(@Valid Girl girl, BindingResult bindingResult){//@Valid 表单验证注解 -- 禁止添加未成年少女
         if (bindingResult.hasErrors()){
-            System.out.println(bindingResult.getFieldError().getDefaultMessage());
-            return null;
+            return bindingResult.getFieldError().getDefaultMessage();
         }
         girl.setCupSize(girl.getCupSize());
         girl.setAge(girl.getAge());
