@@ -63,7 +63,7 @@ public class HttpAspect {
     @AfterReturning(returning = "object",pointcut = "log()")
     public void doAfterReturning(Object object){// 选择  --> Object java.lang
         System.out.println("3.获取方法执行所返回的内容。。。doAfterReturning()");
-        logger.info("3.获取方法执行所返回的内容=resopnse={}",object.toString());
+        logger.info("3.resopnse={}",object.toString());
 
     }
 
