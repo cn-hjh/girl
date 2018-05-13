@@ -1,9 +1,10 @@
 package com.hm.girl.controller;
 
-import com.hm.girl.aspect.HttpAspect;
 import com.hm.girl.domain.Girl;
+import com.hm.girl.domain.Result;
 import com.hm.girl.respository.GirlRespository;
 import com.hm.girl.service.GirlService;
+import com.hm.girl.utils.ResultUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,13 +41,14 @@ public class GirlController {
      * @return
      */
     @PostMapping(value = "/girls")
-    public Object girlAdd(@Valid Girl girl, BindingResult bindingResult){//@Valid 表单验证注解 -- 禁止添加未成年少女
+    public Result girlAdd(@Valid Girl girl, BindingResult bindingResult){//@Valid 表单验证注解 -- 禁止添加未成年少女
         if (bindingResult.hasErrors()){
-            return bindingResult.getFieldError().getDefaultMessage();
+            return ResultUtil.error(1,bindingResult.getFieldError().getDefaultMessage());
         }
         girl.setCupSize(girl.getCupSize());
         girl.setAge(girl.getAge());
-        return girlRespository.save(girl);
+        return ResultUtil.success(girlRespository.save(girl));
+
     }
     //查询一个女生
     @GetMapping(value = "/girls/{id}")
@@ -83,6 +85,18 @@ public class GirlController {
     @PostMapping(value = "/girls/tow")
     public void girlTow(){
         girlService.insertTow();
+    }
+
+    @GetMapping(value = "girls/getAge/{id}")
+    public void getAge(@PathVariable("id") Integer id) throws Exception {
+        girlService.getAge(id);
+        /*try {
+            girlService.getAge(id);
+        }catch (Exception e){
+            System.out.println("Controller有异常:"+e);
+            e.printStackTrace();
+        }*/
+
     }
 
 
