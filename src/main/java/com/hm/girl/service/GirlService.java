@@ -48,12 +48,23 @@ public class GirlService {
             //返回"你可能在上初中" code=101
             System.out.println("初中");
             throw new GirlException(ResultEnum.MIDDLE_SCHOOL);
+        }else{
+            System.out.println("这是一个成年人");
         }
 
         //如果>16岁,加钱
         //...
         //如果>16 ,加钱
 
+    }
+
+    /**
+     * 通过id查询女生信息
+     * @param id
+     * @return
+     */
+    public Girl findOne(Integer id){
+        return girlRepository.findOne(id);
     }
 
 }

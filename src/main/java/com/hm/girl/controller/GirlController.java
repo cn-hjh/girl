@@ -88,13 +88,14 @@ public class GirlController {
     }
 
     @GetMapping(value = "girls/getAge/{id}")
-    public void getAge(@PathVariable("id") Integer id)  {
-        try {
+    public void getAge(@PathVariable("id") Integer id) throws Exception {
+        girlService.getAge(id);
+        /*try {
             girlService.getAge(id);
         }catch (Exception e){
             System.out.println("Controller有异常:"+e);
             e.printStackTrace();
-        }
+        }*/
 
     }
 

@@ -22,7 +22,7 @@ public class HttpAspect {
     //@Before("execution(public * com.hm.girl.controller.GirlController.girlList(..))")//  .. 表示任何参数
     @Pointcut("execution(public * com.hm.girl.controller.GirlController.*(..))")//  .*(..) 拦截所有方法
     public void log(){
-        System.out.println("这个为什么不打印log()");
+        //System.out.println("这个为什么不打印log()");
     }
 
     /**
@@ -62,8 +62,7 @@ public class HttpAspect {
      */
     @AfterReturning(returning = "object",pointcut = "log()")
     public void doAfterReturning(Object object){// 选择  --> Object java.lang
-        System.out.println("3.获取方法执行所返回的内容。。。doAfterReturning()");
-        logger.info("3.resopnse={}",object.toString());
+        logger.info("3.resopnse={}",object.getClass());
 
     }
 

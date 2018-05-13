@@ -2,10 +2,6 @@ package com.hm.girl.exception;
 
 import com.hm.girl.enums.ResultEnum;
 
-/**
- * Created by 廖师兄
- * 2017-01-21 14:05
- */
 public class GirlException extends RuntimeException{
 
    private Integer code;

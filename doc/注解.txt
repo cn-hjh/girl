@@ -41,3 +41,8 @@
 
 @Valid 表单验证注解
 
+
+// ------------- 单元测试
+@RunWith(SpringRunner.class) //测试环境跑
+@SpringBootTest              //代表将会启动整个springboot工程
+@AutoConfigureMockMvc  //测试controller用到
